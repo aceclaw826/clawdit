@@ -1,0 +1,55 @@
+// =============================================================================
+// Clawdit — openclaw.json Configuration Snippet
+// =============================================================================
+//
+// Add the following to your existing ~/.openclaw/openclaw.json to register
+// Clawdit as a separate agent. Merge these entries into your existing
+// agents.list and bindings arrays — do NOT replace your entire config.
+//
+// Adjust channel bindings to match your preferred way of reaching Clawdit
+// (WhatsApp, Telegram, Discord, etc.)
+// =============================================================================
+
+{
+  // Add this entry to your existing agents.list array
+  agents: {
+    list: [
+      // ... your existing agents ...
+      {
+        id: "clawdit",
+        name: "Clawdit",
+        workspace: "~/.openclaw/workspace-clawdit",
+        agentDir: "~/.openclaw/agents/clawdit/agent",
+        // Sonnet 4.6 is the default for broad accessibility.
+        // For deeper analysis, Opus 4.6 is strongly recommended if available
+        // (catches subtler contradictions and goal-alignment issues).
+        model: "anthropic/claude-sonnet-4-6",
+        // Restrict tools to read-only + limited exec + write to own workspace
+        tools: {
+          allow: ["read", "exec", "write", "edit"],
+          deny: ["browser", "canvas", "nodes", "cron", "image_generate"]
+        }
+      }
+    ]
+  },
+
+  // Add binding(s) to route messages to Clawdit.
+  // Option A: Dedicate a specific Telegram bot to Clawdit
+  // Option B: Route a specific WhatsApp DM to Clawdit
+  // Option C: Use a specific Discord channel
+  //
+  // Examples (uncomment and adapt one):
+
+  bindings: [
+    // ... your existing bindings ...
+
+    // Option A: Dedicated Telegram bot
+    // { agentId: "clawdit", match: { channel: "telegram", accountId: "clawdit" } },
+
+    // Option B: Specific WhatsApp peer
+    // { agentId: "clawdit", match: { channel: "whatsapp", peer: { kind: "direct", id: "+1XXXXXXXXXX" } } },
+
+    // Option C: Specific Discord channel
+    // { agentId: "clawdit", match: { channel: "discord", peer: { kind: "channel", id: "CHANNEL_ID" } } },
+  ]
+}

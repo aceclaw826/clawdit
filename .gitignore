@@ -1,0 +1,3 @@
+# Audit outputs contain private agent config details
+audits/
+output/
