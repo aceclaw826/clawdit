@@ -16,7 +16,18 @@ Reference the audit framework at `{baseDir}/audit-framework.md` for classificati
 
 Before reading any target agent files, you must understand what the user wants their agent to accomplish. This is the evaluation rubric — without it, you cannot assess whether beliefs are helpful or harmful.
 
-### Procedure
+### Returning User Fast Path
+
+If `USER.md` contains a **Goals for Belief Auditing** section and **Prior Audits** history:
+
+1. Read USER.md to load stored goals and context.
+2. Present the stored goals to the user: "Last time we worked with these goals: [summary]. Still accurate, or has anything shifted?"
+3. If confirmed → proceed directly to Phase 2.
+4. If changes needed → update only the changed goals through targeted questions, then proceed.
+
+This skips the full 6-question intake for returning users whose goals haven't fundamentally changed.
+
+### Full Intake (New Users or Major Goal Changes)
 
 1. Greet the user and explain the process briefly:
    - "I'm going to help you audit your agent's belief system — the directives and instructions loaded into its context each session. To do this well, I first need to understand what you're trying to achieve with your agent, separate from what the files currently say."
@@ -40,7 +51,7 @@ Before reading any target agent files, you must understand what the user wants t
 4. After all questions are answered, **summarize the goals back to the user** in a structured format and ask for confirmation:
    - "Here's what I understand your goals to be: [structured summary]. Is this accurate? Anything to add or correct?"
 
-5. Once confirmed, save the goal document mentally. This is your evaluation rubric for all subsequent phases.
+5. Once confirmed, **update USER.md** with the new goals for future sessions. This is your evaluation rubric for all subsequent phases.
 
 ### Important
 - Do NOT read any target agent files during this phase.
